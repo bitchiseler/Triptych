@@ -24,45 +24,51 @@
     <div class="main-area">
 
         <div class="editor-container">
-            <!-- Right Panel: TOC | Content -->
-            <div class="toc-panel" id="toc-panel">
-                <div style="font-weight: bold; margin-bottom: 10px; font-size: 0.8em;">OUTLINE</div>
-                <!-- TOC Content will be injected here or manually placed -->
-                <!-- Simple TOC generation for Jekyll (using kramdown auto ids) -->
-                <script>
-                    // Basic JS to generate TOC from headers
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const content = document.querySelector('.content-panel');
-                        const toc = document.getElementById('toc-panel');
-                        const headers = content.querySelectorAll('h1, h2, h3');
-                        const ul = document.createElement('ul');
+            <!-- Top Header -->
+            <div class="panel-header">{{ page.title }}</div>
 
-                        headers.forEach(header => {
-                            if (!header.id) return;
-                            const li = document.createElement('li');
-                            const a = document.createElement('a');
-                            a.href = '#' + header.id;
-                            a.textContent = header.textContent;
-                            li.appendChild(a);
-                            ul.appendChild(li);
+            <!-- Main Body: TOC | Content -->
+            <div class="editor-body">
+                <div class="toc-panel" id="toc-panel">
+                    <div style="font-weight: bold; margin-bottom: 10px; font-size: 0.8em; padding-top: 10px;">OUTLINE
+                    </div>
+                    <!-- TOC Content will be injected here or manually placed -->
+                    <!-- Simple TOC generation for Jekyll (using kramdown auto ids) -->
+                    <script>
+                        // Basic JS to generate TOC from headers
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const content = document.querySelector('.content-panel');
+                            const toc = document.getElementById('toc-panel');
+                            const headers = content.querySelectorAll('h1, h2, h3');
+                            const ul = document.createElement('ul');
+
+                            headers.forEach(header => {
+                                if (!header.id) return;
+                                const li = document.createElement('li');
+                                const a = document.createElement('a');
+                                a.href = '#' + header.id;
+                                a.textContent = header.textContent;
+                                li.appendChild(a);
+                                ul.appendChild(li);
+                            });
+
+                            if (headers.length > 0) {
+                                toc.appendChild(ul);
+                            } else {
+                                toc.innerHTML += "<div style='opacity:0.5; padding-left: 15px;'>No outline</div>";
+                            }
                         });
 
-                        if (headers.length > 0) {
-                            toc.appendChild(ul);
-                        } else {
-                            toc.innerHTML += "<div style='opacity:0.5; padding-left: 15px;'>No outline</div>";
+                        function toggleMobileMenu() {
+                            const container = document.getElementById('sidebar-container');
+                            container.classList.toggle('open');
                         }
-                    });
+                    </script>
+                </div>
 
-                    function toggleMobileMenu() {
-                        const container = document.getElementById('sidebar-container');
-                        container.classList.toggle('open');
-                    }
-                </script>
-            </div>
-
-            <div class="content-panel">
-                {{ content }}
+                <div class="content-panel">
+                    {{ content }}
+                </div>
             </div>
         </div>
     </div>

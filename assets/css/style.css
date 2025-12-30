@@ -157,17 +157,51 @@ body {
 
 .editor-container {
   display: flex;
+  flex-direction: column;
   flex: 1;
   overflow: hidden;
 }
 
+.editor-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* .panel-column and .panel-header styles below */
+
+
+.panel-header {
+  height: 35px;
+  /* Same as tabs-bar height */
+  background-color: #2d2d2d;
+  /* Header background similar to tab bar */
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  font-size: 0.9em;
+  border-bottom: 1px solid var(--border-color);
+  /* Separator */
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+
+/* Specific adjustment for active tab look if needed, but basic header is fine */
+
+
 .toc-panel {
   width: 200px;
   border-right: 1px solid var(--border-color);
-  padding: 20px;
+  padding: 10px 20px;
   overflow-y: auto;
   font-size: 0.9em;
   background-color: var(--editor-bg);
+  flex-shrink: 0;
 }
 
 .toc-panel ul {
