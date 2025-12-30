@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="menu-toggle" onclick="toggleMobileMenu()">=</div>
+        <div style="margin-left: 15px; font-weight: bold;">VS Code Theme</div>
+    </div>
+
+    <div id="sidebar-container" class="sidebar-container">
+        {% include activity_bar.html %}
+        {% include sidebar.html %}
+    </div>
+
+    <div class="main-area">
+
+        <div class="editor-container">
+            <!-- Right Panel: TOC | Content -->
+            <div class="toc-panel" id="toc-panel">
+                <div style="font-weight: bold; margin-bottom: 10px; font-size: 0.8em;">OUTLINE</div>
+                <!-- TOC Content will be injected here or manually placed -->
+                <!-- Simple TOC generation for Jekyll (using kramdown auto ids) -->
+                <script>
+                    // Basic JS to generate TOC from headers
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const content = document.querySelector('.content-panel');
+                        const toc = document.getElementById('toc-panel');
+                        const headers = content.querySelectorAll('h1, h2, h3');
+                        const ul = document.createElement('ul');
+
+                        headers.forEach(header => {
+                            if (!header.id) return;
+                            const li = document.createElement('li');
+                            const a = document.createElement('a');
+                            a.href = '#' + header.id;
+                            a.textContent = header.textContent;
+                            li.appendChild(a);
+                            ul.appendChild(li);
+                        });
+
+                        if (headers.length > 0) {
+                            toc.appendChild(ul);
+                        } else {
+                            toc.innerHTML += "<div style='opacity:0.5; padding-left: 15px;'>No outline</div>";
+                        }
+                    });
+
+                    function toggleMobileMenu() {
+                        const container = document.getElementById('sidebar-container');
+                        container.classList.toggle('open');
+                    }
+                </script>
+            </div>
+
+            <div class="content-panel">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

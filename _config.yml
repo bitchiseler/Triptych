@@ -1,0 +1,16 @@
+title: VS Code Theme Site
+description: A Jekyll site with VS Code interface styling
+baseurl: ""
+url: ""
+
+collections:
+  contents:
+    output: true
+    permalink: /:collection/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "contents"
+    values:
+      layout: "default"
